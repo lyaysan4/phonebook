@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--<meta charset="UTF-8" name="robots" content="noindex,follow"/>-->
+    <meta charset="UTF-8"/>
+    <title>Справочник</title>
+    <link rel="stylesheet" href="css/menu.css"/>
+    <link rel="stylesheet" href="css/table.css"/>
+    <link rel="stylesheet" href="css/delete.css"/>
+    <link rel="stylesheet" href="css/add.css"/>
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'/>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"' rel='stylesheet'
+          type='text/css'/>
+</head>
+<body>
+<header th:fragment="site-header">
+    <ul class="nav">
+        <li>
+            <a href="mainPage.html" th:href="@{/}">Справочник</a>
+        </li>
+        <li>
+            <a href="add" th:href="@{/add}">Добавить</a>
+        </li>
+        <li id="search">
+            <form th:action="@{/search}" method="get">
+                <input type="text" name="searchLine" id="search_text" placeholder="Поиск.."/>
+                <button type="submit" id="search_button"></button>
+            </form>
+        </li>
+    </ul>
+</header>
+    <h3 th:text="${notification}"></h3>
+    <!--/*@thymesVar id="persons" type="java.util.List"*/-->
+    <!--/*@thymesVar id="person" type="phonebook.model.Person"*/-->
+    <div th:if="${persons ne null and not persons.isEmpty() }">
+
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Имя</th>
+                <th>Номер телефона</th>
+                <th>Адрес</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="person: ${persons}">
+                <td th:text="${person.id}"></td>
+                <td th:text="${person.name}"></td>
+                <td th:text="${person.phoneNumber}"></td>
+                <td th:text="${person.address}"></td>
+                <form th:action="@{delete}" method="post">
+                    <td>
+                        <input type="hidden" name="id" th:value="${person.id}"/>
+                        <button class="trash">
+                            <span class="lid"></span>
+                            <span class="can"></span>
+                        </button>
+                    </td>
+                </form>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

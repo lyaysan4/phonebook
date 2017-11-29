@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Справочник</title>
+    <link rel="stylesheet" href="css/add.css"/>
+    <link rel="stylesheet" href="css/menu.css"/>
+    <style>
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+<header th:replace="mainPage::site-header"/>
+<div class="add">
+    <h1>Добавить новую запись</h1>
+<form th:action="@{/add}" method="post" enctype="application/json">
+        <input type="text" name="name" required="required" id="search_text" placeholder="Введите имя"/><br/>
+        <input type="number" name="phoneNumber" required="required" id="search_text" placeholder="Введите номер телефона"/><br/>
+        <input type="text" name="address" required="required" id="search_text" placeholder="Введите адрес"/><br/>
+    <button type="submit" class="btn btn-primary btn-block btn-large">Добавить</button>
+</form>
+    <h3 th:text="${notification}"></h3>
+</div>
+
+
+</body>
+</html>
