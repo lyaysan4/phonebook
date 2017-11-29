@@ -14,18 +14,10 @@ public interface PersonRepository extends CrudRepository<Person, Long> {
     List<Person> findByAddressLikeIgnoreCase(String line);
     List<Person> findByPhoneNumberLikeIgnoreCase(String line);
 
-    boolean existsByAddress(String address);
-    boolean existsByPhoneNumber(String address);
-
     default List<Person> findByLine(String line) {
         return Stream.of(findByNameLikeIgnoreCase(line), findByAddressLikeIgnoreCase(line), findByPhoneNumberLikeIgnoreCase(line))
                 .flatMap(Collection::stream)
                 .distinct()
                 .collect(Collectors.toList());
     }
-
-
-    List<Person> findByName(String name);
-    Person findById(Long id);
-    List<Person> findAll();
 }

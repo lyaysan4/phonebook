@@ -39,14 +39,14 @@ public class PersonController {
         return "redirect:/";
     }
 
-    @RequestMapping("/add")
+    @GetMapping("/add")
     public String add() {
         return "addPerson";
     }
 
     @GetMapping("/")
     public String showAll(Model model) {
-        List<Person> persons = personRepository.findAll();
+        List<Person> persons = (List<Person>) personRepository.findAll();
         if (persons != null)
         model.addAttribute("persons", persons);
         return "mainPage";
